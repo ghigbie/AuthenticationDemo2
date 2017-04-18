@@ -9,8 +9,16 @@ const express               = require("express"),
 const User = require("./models/user");
       
 mongoose.connect("mongodb://localhost/auth_demo_app");
+
+app.use(require("express-session")({
+    secret: "The dog that barks at me is the best dog ever",
+    resave: false,
+    saveUninitialized: false
+}));
       
 app.set("view engine", "ejs");
+app.use(passport.initialize()); //this line is needed anytime we use passport
+app.use(passport.session());   //this line is needed anytime we use passport
 
 
 //PATHS
