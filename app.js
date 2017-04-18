@@ -17,11 +17,16 @@ app.use(require("express-session")({
 }));
       
 app.set("view engine", "ejs");
+app.use(bodyParser.urlencoded({extened: true}));
 app.use(passport.initialize()); //this line is needed anytime we use passport
 app.use(passport.session());   //this line is needed anytime we use passport
 
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-//PATHS
+//==========================
+//ROUTES
+//==========================
 app.get("/", (req, res) => {
    res.render("home"); 
 });
@@ -30,8 +35,14 @@ app.get("/login", (req, res) => {
     res.render("login");
 });
 
+//show sign up form
 app.get("/register", (req, res) => {
     res.render("register");
+});
+
+//handle user sign up
+app.post("/register", (req, res) => {
+    res.send("REGISTER POST ROUTE");
 });
 
 app.get("/secret", (req, res) => {
