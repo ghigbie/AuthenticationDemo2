@@ -1,5 +1,8 @@
 const express = require("express"),
+      mongoose = require("mongoose"),
       app = express();
+      
+mongoose.connect("mongodb://localhost/auth_demo_app");
       
 app.set("view engine", "ejs");
 
