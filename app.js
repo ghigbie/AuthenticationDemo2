@@ -1,11 +1,17 @@
-const express = require("express"),
-      mongoose = require("mongoose"),
-      app = express();
+const express               = require("express"),
+      mongoose              = require("mongoose"),
+      passport              = require("passport"),
+      bodyParser            = require("body-parser"),
+      LocalStrategy         = require("passport-local"),
+      passportLocalMongoose = require("passport-local-mongoose"),
+      app                   = express();
       
 mongoose.connect("mongodb://localhost/auth_demo_app");
       
 app.set("view engine", "ejs");
 
+
+//PATHS
 app.get("/", (req, res) => {
    res.render("home"); 
 });
