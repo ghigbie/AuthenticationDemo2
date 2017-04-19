@@ -65,16 +65,24 @@ app.post("/login", passport.authenticate("local", {
 
 //LOGOUT ROUTE
 app.get("/logout", (req, res) => {
-    res.send("OK, I will log you out!");
+    req.logout();
+    res.redirect("/");
 });
 
-app.get("/secret", (req, res) => {
+app.get("/secret", isLoggedIn, (req, res) => {
    res.render("secret"); 
 });
       
 app.get("*", (req, res) => {
     res.render("notfound");
 });
+
+let isLoggedIn = (req, res, next) => {
+   if(req.isAuthenticated()){
+       return next();
+   }
+   res.redirect("/login");
+}
 
 app.listen(process.env.PORT, process.env.IP, () => {
   console.log("Server is listening");  
