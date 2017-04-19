@@ -31,18 +31,28 @@ app.get("/", (req, res) => {
    res.render("home"); 
 });
 
-app.get("/login", (req, res) => {
-    res.render("login");
-});
-
 //show sign up form
 app.get("/register", (req, res) => {
     res.render("register");
 });
 
-//handle user sign up
-app.post("/register", (req, res) => {
-    res.send("REGISTER POST ROUTE");
+//handling user sign up
+app.post("/register", function(req, res){
+    User.register(new User({username: req.body.username}), req.body.password, function(err, user){
+        if(err){
+            console.log(err);
+            res.render("register");
+        }else{
+            passport.authenticate("local")(req, res, function(){
+                res.redirect("/secret");
+            });
+        }
+    });
+});
+
+//LOGIN ROUTEs
+app.get("/login", (req, res) => {
+    res.render("login");
 });
 
 app.get("/secret", (req, res) => {
