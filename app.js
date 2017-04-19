@@ -77,7 +77,7 @@ app.get("*", (req, res) => {
     res.render("notfound");
 });
 
-let isLoggedIn = (req, res, next) => {
+var isLoggedIn = (req, res, next) => {
    if(req.isAuthenticated()){
        return next();
    }
