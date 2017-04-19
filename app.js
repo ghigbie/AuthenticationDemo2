@@ -21,6 +21,7 @@ app.use(bodyParser.urlencoded({extened: true}));
 app.use(passport.initialize()); //this line is needed anytime we use passport
 app.use(passport.session());   //this line is needed anytime we use passport
 
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
