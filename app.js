@@ -37,7 +37,7 @@ app.get("/register", (req, res) => {
 });
 
 //handling user sign up
-app.post("/register", function(req, res){
+app.post("/register", (req, res) => {
     User.register(new User({username: req.body.username}), req.body.password, function(err, user){
         if(err){
             console.log(err);
@@ -52,7 +52,14 @@ app.post("/register", function(req, res){
 
 //LOGIN ROUTEs
 app.get("/login", (req, res) => {
-    res.render("login");
+   res.render("login"); 
+});
+
+//LOGIN POST ROUTE - responsible for login logic
+app.post("/login", passport.authenticate("local", {
+    successRedirect: "/secret",
+    failureRedirect: "/login"
+}), (req, res) => {
 });
 
 app.get("/secret", (req, res) => {
