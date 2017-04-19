@@ -63,6 +63,11 @@ app.post("/login", passport.authenticate("local", {
 }), (req, res) => {
 });
 
+//LOGOUT ROUTE
+app.get("/logout", (req, res) => {
+    res.send("OK, I will log you out!");
+});
+
 app.get("/secret", (req, res) => {
    res.render("secret"); 
 });
